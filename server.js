@@ -52,7 +52,10 @@ app.get('/weeby/magic', function(req, res) {
   res.send(counterSpell)
 })
 
-var server = app.listen(1337, function() {
+
+app.set('port', (process.env.PORT || 1337))
+
+var server = app.listen(app.get('port'), function() {
   var host = server.address().address
   var port = server.address().port
   console.log('listening at http://%s:%s', host, port)
