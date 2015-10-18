@@ -1,5 +1,7 @@
-var app = require('express')()
+var express = require('express');
+var app = express();
 
+app.use(express.static(__dirname + '/public'));
 
 app.use(function(req, res, next) {
   if (req.method == 'GET') {
@@ -53,8 +55,13 @@ app.get('/weeby/magic', function(req, res) {
 })
 
 
-app.set('port', (process.env.PORT || 1337))
+app.get('/', function(request, response) {
+  response.render('index');
+});
 
+
+app.set('port', (process.env.PORT || 1337))
+app.set('view engine', 'ejs');
 var server = app.listen(app.get('port'), function() {
   var host = server.address().address
   var port = server.address().port
